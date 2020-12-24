@@ -20,7 +20,7 @@ Code: `python3 Cifar10.py --network fca_resnet20 `
 
 ### Experiments with different network archs and regularizations. 
 | Base Network  | Dataset | Acc (ResNet + SE) | Acc (ResNet + FCA)  |
-|:------------:|:------:|:------:|:------:|:------:|:------:|
+|:------------:|:------:|:------:|:------:|
 | resnet20 | CIFAR10 | 92.30 | 92.49 (+0.190)|
 | resnet20 | CIFAR100 | 68.81 | 68.32 (-0.49)|
 | res44 | CIFAR10  |  - | -  |
@@ -31,7 +31,7 @@ Code: `python3 Cifar10.py --network fca_resnet20 `
 ### Ablation Study about dct_weights
 refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
 | Dataset | network | DCT_Weight | Acc |
-|:------:|:------:|:------:|:------:|:------:|
+|:------:|:------:|:------:|:------:|
 | CIFAR100 | resnet20 |DCT+Buffer (default)| 68.32 |
 | CIFAR100 | resnet20 |DCT+Param | 68.76 |
 | CIFAR100 | resnet20 |Rand+Param| - |
