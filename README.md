@@ -1,50 +1,39 @@
 # SENet-CIFAR10
-An implementation of the paper [_Squeeze-and-Excitation Networks_](https://arxiv.org/abs/1709.01507) on CIFAR10 dataset.
+An implementation of the paper [FcaNet: Frequency Channel Attention Networks](https://arxiv.org/abs/2012.11879) on CIFAR10/CIFAR100 dataset.
 
 ## how to run
-Code: `python3 Cifar10.py`
+Code: `python3 Cifar10.py--network fca_resnet20 `
 
-For experiments with hyper-parameters, check `Cifar10.py`
-
+## Notes
+- This project is only for my own study purpose. Please don't star this project because I'm not one of the paper authors. If you want to try FcaNet, welcome to use the codes and follow the author of the paper-[cfzd](https://github.com/cfzd).
+- The basic code architecture is based on [SENet-cifar10](https://github.com/Jyouhou/SENet-cifar10). Very few tricks are utilized, so the performance may not be satisfying.
+- The CIFAR datasets are pretty small compared with ImageNet, so the experiments are not stable and representative for verifying the algorithm. More experiments on ImageNet will coming soon.
 ## Experiment
 
-## Implementations
-- pytorch 1.0.1
-- torchvision 0.2.2
+## Denpendencies
+- pytorch 1.4.0
+- torchvision 0.5.0
 
 ### Conditions
 - Data augmentation: pad=4, crop=32; horizontal flip
 - optim: `default = SGD(lr=0.1,m=0.9,wd=1e-4, bs=128)`
 
 ### Experiments with different network archs and regularizations. 
-| Base Network | Optim | Acc (Mine + SE + cutout=16) | Acc (Mine + SE) | Acc (Mine) | Acc (ResNet paper) |
+| Base Network  | Dataset | Acc (ResNet + SE) | Acc (ResNet + FCA)  |
 |:------------:|:------:|:------:|:------:|:------:|:------:|
-| res20 | default | 93.49 (+2.24) | 92.15 (+0.90) | 92.08 (+0.83) | 91.25 |
-| res32 | default | 94.20 (+1.71) | 92.96 (+0.47) | 92.55 (+0.06) | 92.49 |
-| res44 | default | 94.55 (+1.79) | 93.53 (+0.70) | 92.76 (-0.07) | 92.83 |
-| res56 | default | 95.15 (+2.12) | 94.02 (+0.99) | 93.62 (+0.59) | 93.03 |
-| res110 | default | 95.63 (+2.24) |94.70 (+1.31) | 93.70 (+0.31) | 93.39 |
-| res20 | bs=64 | 93.46 (+2.21) | 92.79 (+1.54) | 92.50 (+1.25) | 91.25 |
-| res110 | bs=64 | 95.85 (+2.22) | 94.81 (+1.18) | 94.61 (+0.98) | (93.63) |
+| resnet20 | CIFAR10 | 92.30 | 92.49 (+0.190)|
+| resnet20 | CIFAR100 | 68.81 | 68.32 (-0.49)|
+| res44 | CIFAR10  |  - | -  |
+| res44 | CIFAR100  |  - | -  |
+| res56 | CIFAR10  |  - | -  |
+| res56 | CIFAR100  |  - | -  |
 
-### Experiments with Dropouts and Cutout
-
-| experiment | network | Size(_Cutout_) | P(_dropout_) | Acc |
+### Ablation Study about dct_weights
+refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
+| Dataset | network | DCT_Weight | Acc |
 |:------:|:------:|:------:|:------:|:------:|
-| baseline | res20 | - | - | 92.15 |
-| -- | res20 | - | 0.1 | 92.35 (+ 0.20) |
-| -- | res20 | - | 0.2 | 92.35 (+ 0.20) |
-| -- | res20 | - | 0.4 | 92.03 (-0.12) |
-| -- | res20 | - | 0.5 | 92.16 (+0.01) |
-| -- | res20 | - | 0.6 | 92.15 (+ 0.00) |
-| -- | res20 | - | 0.8 | 91.67 (-0.48) |
-| -- | res20 | - | 0.9 | 89.69 (-2.46) |
-| baseline | res20 | - | - | 92.15 |
-| -- | res20 | 2 | - | 92.14 (-0.01) |
-| -- | res20 | 4 | - | 92.76 (+0.61) |
-| -- | res20 | 6 | - | 92.37 (+0.22) |
-| -- | res20 | 8 | - | 93.12 (+0.97) |
-| -- | res20 | 12 | - | 93.12 (+0.97) |
-| -- | res20 | 16 | - | 93.27 (+1.12) |
-| -- | res20 | 20 | - | 93.05 (+0.90) |
+| CIFAR100 | resnet20 |DCT+Buffer (default)| 68.32 |
+| CIFAR100 | resnet20 |DCT+Param | 68.76 |
+| CIFAR100 | resnet20 |Rand+Param| - |
+
 
