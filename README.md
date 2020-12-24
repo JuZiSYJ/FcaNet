@@ -2,7 +2,7 @@
 An implementation of the paper [FcaNet: Frequency Channel Attention Networks](https://arxiv.org/abs/2012.11879) on CIFAR10/CIFAR100 dataset.
 
 ## how to run
-Code: `python3 Cifar10.py--network fca_resnet20 `
+Code: `python3 Cifar10.py --network fca_resnet20 `
 
 ## Notes
 - This project is only for my own study purpose. Please don't star this project because I'm not one of the paper authors. If you want to try FcaNet, welcome to use the codes and follow the author of the paper-[cfzd](https://github.com/cfzd).
