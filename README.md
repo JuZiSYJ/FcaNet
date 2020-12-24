@@ -5,7 +5,7 @@ An implementation of the paper [FcaNet: Frequency Channel Attention Networks](ht
 Code: `python Cifar.py --network fca_resnet20 `
 
 ## Notes
-- This project is only for my own study purpose. Please don't star this project because I'm not one of the paper authors. If you want to try FcaNet, welcome to use the codes and follow the author of the paper-[cfzd](https://github.com/cfzd).
+- This project is only for my own study purpose. Please don't star this project because I'm not one of the authors. If you want to try FcaNet, welcome to use the codes and follow the author of the paper--[cfzd](https://github.com/cfzd).
 - The basic code architecture is based on [SENet-cifar10](https://github.com/Jyouhou/SENet-cifar10). Very few tricks are utilized, so the performance may not be satisfying.
 - The CIFAR datasets are pretty small compared with ImageNet, so the experiments are not stable and representative for verifying the algorithm. More experiments on ImageNet will coming soon.
 ## Experiment
