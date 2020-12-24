@@ -1,4 +1,4 @@
-# SENet-CIFAR10
+# FcaNet-CIFAR10
 An implementation of the paper [FcaNet: Frequency Channel Attention Networks](https://arxiv.org/abs/2012.11879) on CIFAR10/CIFAR100 dataset.
 
 ## how to run
