@@ -27,7 +27,7 @@ Code: `python Cifar.py --network fca_resnet20 `
 | res44 | CIFAR10  |  - | -  |
 | res44 | CIFAR100  |  - | -  |
 | res56 | CIFAR10  |  - | -  |
-| res56 | CIFAR100  |  - | -  |
+| res56 | CIFAR100  |  72.33 | 71.35  |
 
 ### Ablation Study about dct_weights
 refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
