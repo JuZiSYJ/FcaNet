@@ -6,7 +6,7 @@ def get_1d_dct(i, freq, L):
         return result 
     else: 
         return result * math.sqrt(2) 
-def get_dct_weights( width, height, channel, fidx_u= [0,0,0,0,0,0,0,1,2,3,4,5,6], fidx_v= [0,1,2,3,4,5,6,0,0,0,0,0,0]):
+def get_dct_weights( width, height, channel, fidx_u= [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5], fidx_v= [0,0,6,0,0,1,1,4,5,1,3,0,0,0,2,3]):
     # width : width of input 
     # height : height of input 
     # channel : channel of input 
