@@ -1,12 +1,12 @@
 import torch,math 
-
+import torch.nn.functional as F
 def get_1d_dct(i, freq, L):
     result = math.cos(math.pi * freq * (i + 0.5) / L) / math.sqrt(L)
     if freq == 0: 
         return result 
     else: 
         return result * math.sqrt(2) 
-def get_dct_weights( width, height, channel, fidx_u= [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5], fidx_v= [0,0,6,0,0,1,1,4,5,1,3,0,0,0,2,3]):
+def get_dct_weights( width, height, channel, fidx_u= [0,0,6,0,0,1,1,4,5,1,3,0,0,0,2,3], fidx_v= [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5]):
     # width : width of input 
     # height : height of input 
     # channel : channel of input 
@@ -45,6 +45,7 @@ class FcaLayer(nn.Module):
 
     def forward(self, x):
         b, c, _, _ = x.size()
+        y = F.adaptive_avg_pool2d(x,7)
         y = torch.sum(x*self.pre_computed_dct_weights,dim=(2,3))
         y = self.fc(y).view(b, c, 1, 1)
         return x * y.expand_as(x)
