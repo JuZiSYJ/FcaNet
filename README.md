@@ -33,7 +33,7 @@ Code: `python Cifar.py --network fca_resnet20 `
 refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
 | Dataset | network | DCT_Weight | Acc |
 |:------:|:------:|:------:|:------:|
-| CIFAR100 | resnet20 |DCT+Buffer (default)| 68.32 |
+| CIFAR100 | resnet20 |DCT+Buffer (default)| 69.00 |
 | CIFAR100 | resnet20 |DCT+Param | 68.76 |
 | CIFAR100 | resnet20 |Rand+Param| - |
 
