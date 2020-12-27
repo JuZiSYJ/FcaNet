@@ -25,7 +25,7 @@ Code: `python Cifar.py --network fca_resnet20 `
 | resnet20 | CIFAR10 | 92.30 | 92.49 (+0.190)|
 | resnet20 | CIFAR100 | 68.81 | 68.32 (-0.49)|
 | res44 | CIFAR10  |  - | -  |
-| res44 | CIFAR100  |  - | -  |
+| res44 | CIFAR100  |  71.75 | 71.61  |
 | res56 | CIFAR10  |  - | -  |
 | res56 | CIFAR100  |  72.33 | 71.35  |
 
