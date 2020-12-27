@@ -19,7 +19,7 @@ Code: `python Cifar.py --network fca_resnet20 `
 - Data augmentation: pad=4, crop=32; horizontal flip
 - optim: `default = SGD(lr=0.1,m=0.9,wd=1e-4, bs=128)`
 
-### Experiments with different network archs and regularizations. 
+### Experiments with different network archs and attentions. 
 | Base Network  | Dataset | Acc (ResNet + SE) | Acc (ResNet + FCA)  |
 |:------------:|:------:|:------:|:------:|
 | resnet20 | CIFAR10 | 92.30 | 92.49 (+0.190)|
@@ -35,6 +35,6 @@ refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
 |:------:|:------:|:------:|:------:|
 | CIFAR100 | resnet20 |DCT+Buffer (default)| 69.00 |
 | CIFAR100 | resnet20 |DCT+Param | 68.76 |
-| CIFAR100 | resnet20 |Rand+Param| - |
+| CIFAR100 | resnet20 |Rand+Param| 64.67 |
 
 
