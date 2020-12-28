@@ -100,9 +100,9 @@ class CifarNet(nn.Module):
         self.bn1 = nn.BatchNorm2d(self.inplane, momentum=BN_momentum)
         self.relu = nn.ReLU(inplace=True)
         self.layer1 = self._make_layer(
-            block, 16, blocks=n_size, stride=1, reduction=reduction,resolution=7)
+            block, 16, blocks=n_size, stride=1, reduction=reduction,resolution=28)
         self.layer2 = self._make_layer(
-            block, 32, blocks=n_size, stride=2, reduction=reduction,resolution=7)
+            block, 32, blocks=n_size, stride=2, reduction=reduction,resolution=14)
         self.layer3 = self._make_layer(
             block, 64, blocks=n_size, stride=2, reduction=reduction,resolution=7)
         self.avgpool = nn.AdaptiveAvgPool2d(1)
