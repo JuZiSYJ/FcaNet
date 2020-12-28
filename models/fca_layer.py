@@ -51,6 +51,6 @@ class FcaLayer(nn.Module):
     def forward(self, x):
         b, c, _, _ = x.size()
         y = F.adaptive_avg_pool2d(x,(self.height,self.width))
-        y = torch.sum(x*self.pre_computed_dct_weights,dim=(2,3))
+        y = torch.sum(y*self.pre_computed_dct_weights,dim=(2,3))
         y = self.fc(y).view(b, c, 1, 1)
         return x * y.expand_as(x)
