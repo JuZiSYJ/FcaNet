@@ -19,15 +19,16 @@ Code: `python Cifar.py --network fca_resnet20 `
 - Data augmentation: pad=4, crop=32; horizontal flip
 - optim: `default = SGD(lr=0.1,m=0.9,wd=1e-4, bs=128)`
 
-### Experiments with different network archs and regularizations. 
+### Experiments with different network archs and attentions. 
+2020-12-28 update: Fix the DCT weights indexes calculation. Also referring to [author's comment in zhihu](https://zhuanlan.zhihu.com/p/338904015)
 | Base Network  | Dataset | Acc (ResNet + SE) | Acc (ResNet + FCA)  |
 |:------------:|:------:|:------:|:------:|
-| resnet20 | CIFAR10 | 92.30 | 92.49 (+0.190)|
-| resnet20 | CIFAR100 | 68.81 | 68.32 (-0.49)|
+| resnet20 | CIFAR10 | 92.30 | 92.49 (+0.19)|
+| resnet20 | CIFAR100 | 68.81 | 69.00 (+0.19)|
 | res44 | CIFAR10  |  - | -  |
-| res44 | CIFAR100  |  - | -  |
+| res44 | CIFAR100  |  71.75 | 71.9(+0.15)  |
 | res56 | CIFAR10  |  - | -  |
-| res56 | CIFAR100  |  72.33 | 71.35  |
+| res56 | CIFAR100  |  72.33 | 72.28  |
 
 ### Ablation Study about dct_weights
 refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
@@ -35,6 +36,6 @@ refer to [the comments in zhihu](https://zhuanlan.zhihu.com/p/338904015).
 |:------:|:------:|:------:|:------:|
 | CIFAR100 | resnet20 |DCT+Buffer (default)| 69.00 |
 | CIFAR100 | resnet20 |DCT+Param | 68.76 |
-| CIFAR100 | resnet20 |Rand+Param| - |
+| CIFAR100 | resnet20 |Rand+Param| 64.67 |
 
 

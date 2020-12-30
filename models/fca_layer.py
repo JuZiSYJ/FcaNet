@@ -1,12 +1,12 @@
 import torch,math 
-
+import torch.nn.functional as F
 def get_1d_dct(i, freq, L):
     result = math.cos(math.pi * freq * (i + 0.5) / L) / math.sqrt(L)
     if freq == 0: 
         return result 
     else: 
         return result * math.sqrt(2) 
-def get_dct_weights( width, height, channel, fidx_u= [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5], fidx_v= [0,0,6,0,0,1,1,4,5,1,3,0,0,0,2,3]):
+def get_dct_weights( width, height, channel, fidx_u= [0,0,6,0,0,1,1,4,5,1,3,0,0,0,2,3], fidx_v= [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5]):
     # width : width of input 
     # height : height of input 
     # channel : channel of input 
@@ -16,6 +16,9 @@ def get_dct_weights( width, height, channel, fidx_u= [0,1,0,5,2,0,2,0,0,6,0,4,6,
     # according to the paper, should be [0,1,0,5,2,0,2,0,0,6,0,4,6,3,2,5]
     # [0,0],[0,1],[6,0],[0,5],[0,2],[1,0],[1,2],[4,0],
     # [5,0],[1,6],[3,0],[0,4],[0,6],[0,3],[2,2],[3,5],
+    scale_ratio = width//7
+    fidx_u = [u*scale_ratio for u in fidx_u]
+    fidx_v = [v*scale_ratio for v in fidx_v]
     dct_weights = torch.zeros(1, channel, width, height) 
     c_part = channel // len(fidx_u) 
     # split channel for multi-spectal attention 
@@ -34,7 +37,9 @@ class FcaLayer(nn.Module):
                  channel,
                  reduction,width,height):
         super(FcaLayer, self).__init__()
-        self.register_buffer('pre_computed_dct_weights',get_dct_weights(width,height,channel))
+        self.width = width
+        self.height = height
+        self.register_buffer('pre_computed_dct_weights',get_dct_weights(self.width,self.height,channel))
         #self.register_parameter('pre_computed_dct_weights',torch.nn.Parameter(get_dct_weights(width,height,channel)))
         self.fc = nn.Sequential(
             nn.Linear(channel, channel // reduction, bias=False),
@@ -45,6 +50,7 @@ class FcaLayer(nn.Module):
 
     def forward(self, x):
         b, c, _, _ = x.size()
-        y = torch.sum(x*self.pre_computed_dct_weights,dim=(2,3))
+        y = F.adaptive_avg_pool2d(x,(self.height,self.width))
+        y = torch.sum(y*self.pre_computed_dct_weights,dim=(2,3))
         y = self.fc(y).view(b, c, 1, 1)
         return x * y.expand_as(x)
